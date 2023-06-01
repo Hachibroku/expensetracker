@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from receipts.views import show_receipt
+from receipts.views import show_receipt, redirect_home
 
 urlpatterns = [
+    path("", redirect_home, name="redirect_home"),
     path("receipts/", show_receipt, name="home"),
     path("admin/", admin.site.urls),
 ]

@@ -7,3 +7,7 @@ def show_receipt(request):
     receipt_list = Receipt.objects.all()
     context = {"receipt_list": receipt_list}
     return render(request, "receipts/list.html", context)
+
+
+def redirect_home(request):
+    return redirect("home")
