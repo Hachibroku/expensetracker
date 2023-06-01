@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from receipts.views import show_receipt
 
 urlpatterns = [
+    path("receipts/", show_receipt, name="home"),
     path("admin/", admin.site.urls),
 ]
