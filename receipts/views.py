@@ -17,6 +17,20 @@ def show_receipt(request):
 
 
 @login_required
+def show_category(request):
+    category_list = ExpenseCategory.objects.filter(owner=request.user)
+    context = {"category_list": category_list}
+    return render(request, "categories/list.html", context)
+
+
+@login_required
+def show_account(request):
+    account_list = Account.objects.filter(owner=request.user)
+    context = {"account_list": account_list}
+    return render(request, "accounts/list.html", context)
+
+
+@login_required
 def create_receipt(request):
     if request.method == "POST":
         form = ReceiptForm(request.POST)
@@ -32,14 +46,15 @@ def create_receipt(request):
 
 
 @login_required
-def show_category(request):
-    category_list = ExpenseCategory.objects.filter(owner=request.user)
-    context = {"category_list": category_list}
-    return render(request, "categories/list.html", context)
-
-
-@login_required
-def show_account(request):
-    account_list = Account.objects.filter(owner=request.user)
-    context = {"account_list": account_list}
-    return render(request, "accounts/list.html", context)
+def create_category(request):
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            category = form.save(False)
+            category.owner = request.user
+            category.save()
+            return redirect("category_list")
+    else:
+        form = CategoryForm()
+    context = {"form": form}
+    return render(request, "categories/create.html", context)
