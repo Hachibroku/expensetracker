@@ -58,3 +58,18 @@ def create_category(request):
         form = CategoryForm()
     context = {"form": form}
     return render(request, "categories/create.html", context)
+
+
+@login_required
+def create_account(request):
+    if request.method == "POST":
+        form = AccountForm(request.POST)
+        if form.is_valid():
+            account = form.save(False)
+            account.owner = request.user
+            account.save()
+            return redirect("account_list")
+    else:
+        form = AccountForm()
+    context = {"form": form}
+    return render(request, "accounts/create.html", context)

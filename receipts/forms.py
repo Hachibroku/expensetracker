@@ -25,9 +25,9 @@ class CategoryForm(forms.ModelForm):
 
 
 class AccountForm(forms.ModelForm):
-    pass
-    # class Meta:
-    #     model = Account
-    #     fields = [
-    #         "",
-    #     ]
+    class Meta:
+        model = Account
+        fields = [
+            "name",
+            "number",
+        ]
