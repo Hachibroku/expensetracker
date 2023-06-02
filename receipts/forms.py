@@ -14,3 +14,11 @@ class ReceiptForm(forms.ModelForm):
             "category",
             "account",
         ]
+
+
+class CategoryForm(forms.Form):
+    pass
+
+
+class AccountForm(forms.Form):
+    pass
