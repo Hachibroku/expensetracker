@@ -1,49 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accounts</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
+  <body>
     <header>
-        <nav>
-            <ul>
-                {% if user.is_authenticated %}
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'category_list' %}">Expense Categories</a></li>
-                <li><a href="{% url 'account_list' %}">Accounts</a></li>
-                <li><a href="{% url 'create_receipt' %}">Create Receipt</a></li>
-                <li><a href="{% url 'create_category' %}">Create an Expense</a></li>
-                <li><a href="{% url 'create_account' %}">Create an Account</a></li>
-                {% else %}
-                <li><a href="{% url 'signup' %}">Sign Up</a>></li>
-                <li><a href="{% url 'login' %}">Login</a></li>
-                {% endif %}
-            </ul>
-        </nav>
+      <nav class="navbar">
+        <ul>
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'category_list' %}">Expense Categories</a></li>
+          <li><a href="{% url 'account_list' %}">Accounts</a></li>
+          <li><a href="{% url 'create_receipt' %}">Create Receipt</a></li>
+          <li><a href="{% url 'create_category' %}">Create an Expense</a></li>
+          <li><a href="{% url 'create_account' %}">Create an Account</a></li>
+          {% else %}
+          <li><a href="{% url 'signup' %}">Sign Up</a>></li>
+          <li><a href="{% url 'login' %}">Login</a></li>
+          {% endif %}
+        </ul>
+      </nav>
     </header>
     <main>
-        <h1>My Account</h1>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Number</th>
-                <th>Number of Receipts</th>
-            </tr>
-            {% for item in account_list %}
-            <tr>
-                <td>{{ item.name }}</td>
-                <td>{{ item.number }}</td>
-                <td>{{ item.receipts.all|length }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+      <h1>My Account</h1>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Number</th>
+          <th>Number of Receipts</th>
+        </tr>
+        {% for item in account_list %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.number }}</td>
+          <td>{{ item.receipts.all|length }}</td>
+        </tr>
+        {% endfor %}
+      </table>
     </main>
-</body>
-
+  </body>
 </html>
